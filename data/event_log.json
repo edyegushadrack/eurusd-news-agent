@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "event": {
+      "event": "Test Event",
+      "country": "USD",
+      "time": "2026-07-20T20:53:52.278Z",
+      "actual": "3.5%",
+      "forecast": "3.2%",
+      "previous": null
+    },
+    "surprise": {
+      "rawDiff": 0.3,
+      "directionalSurprise": 0.3,
+      "magnitude": "modest",
+      "currency": "USD",
+      "bullishFor": "USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.14169,
+      "after1m": 1.14169,
+      "after5m": 1.14169,
+      "after15m": 1.14169
+    },
+    "summary": "Test Event: actual 3.5% (modest beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
+    "loggedAt": "2026-07-20T21:35:34.278Z"
+  }
+]

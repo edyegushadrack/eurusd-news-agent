@@ -1,18 +1,7 @@
 {
   "alerted": [],
-  "pending": [
-    {
-      "key": "Test Event-2026-07-20T20:53:52.278Z",
-      "releasedEvent": {
-        "event": "Test Event",
-        "country": "USD",
-        "time": "2026-07-20T20:53:52.278Z",
-        "actual": "3.5%",
-        "forecast": "3.2%",
-        "previous": null
-      },
-      "loggedAt": "2026-07-20T20:53:52.278Z"
-    }
-  ],
-  "processed": []
+  "pending": [],
+  "processed": [
+    "Test Event-2026-07-20T20:53:52.278Z"
+  ]
 }
