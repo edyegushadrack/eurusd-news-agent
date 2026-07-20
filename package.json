@@ -1,0 +1,13 @@
+{
+  "name": "eurusd-news-agent",
+  "version": "3.0.0",
+  "description": "EUR/USD news-event reaction agent - free ForexFactory calendar for pre-alerts, manual actual-value logging for surprise + price reaction analysis, runs on GitHub Actions",
+  "type": "module",
+  "main": "src/check.js",
+  "scripts": {
+    "check": "node src/check.js",
+    "test-calendar": "node src/testCalendar.js",
+    "test-price": "node src/testPrice.js"
+  },
+  "dependencies": {}
+}

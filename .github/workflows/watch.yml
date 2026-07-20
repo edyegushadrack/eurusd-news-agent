@@ -1,0 +1,67 @@
+name: EUR/USD News Agent
+
+on:
+  schedule:
+    # Runs every 5 minutes for pre-alerts and pending reaction checks.
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      event:
+        description: 'Event name (e.g. "CPI m/m") - leave blank for a normal check'
+        required: false
+      actual:
+        description: 'Actual released value (e.g. "3.5%" or "215K")'
+        required: false
+      forecast:
+        description: 'Forecast value (optional - fill in if known)'
+        required: false
+      previous:
+        description: 'Previous value (optional)'
+        required: false
+      country:
+        description: 'Currency the event applies to'
+        required: false
+        type: choice
+        options:
+          - USD
+          - EUR
+        default: USD
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run check
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          MANUAL_EVENT: ${{ github.event.inputs.event }}
+          MANUAL_ACTUAL: ${{ github.event.inputs.actual }}
+          MANUAL_FORECAST: ${{ github.event.inputs.forecast }}
+          MANUAL_PREVIOUS: ${{ github.event.inputs.previous }}
+          MANUAL_COUNTRY: ${{ github.event.inputs.country }}
+        run: node src/check.js
+
+      - name: Commit updated state and logs
+        run: |
+          git config user.name "eurusd-news-agent-bot"
+          git config user.email "actions@github.com"
+          git add data/
+          git diff --quiet --cached || git commit -m "Update event log [skip ci]"
+          git push
