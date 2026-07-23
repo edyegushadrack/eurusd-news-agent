@@ -1,5 +1,8 @@
 {
-  "alerted": [],
+  "alerted": [
+    "Main Refinancing Rate-2026-07-23T12:15:00.000Z",
+    "Monetary Policy Statement-2026-07-23T12:15:00.000Z"
+  ],
   "pending": [],
   "processed": [
     "Test Event-2026-07-20T20:53:52.278Z"
