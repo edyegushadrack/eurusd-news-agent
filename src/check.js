@@ -36,6 +36,7 @@ async function handleUpcomingAlerts() {
     events = await getUpcomingEvents();
   } catch (err) {
     console.error('Calendar fetch failed:', err.message);
+    await sendTelegramAlert(`⚠️ Calendar feed unreachable: ${err.message}\nWill retry next run (~5 min).`);
     return;
   }
 

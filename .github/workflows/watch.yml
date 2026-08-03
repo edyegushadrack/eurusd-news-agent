@@ -27,6 +27,10 @@ on:
           - EUR
         default: USD
 
+concurrency:
+  group: eurusd-news-agent
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
