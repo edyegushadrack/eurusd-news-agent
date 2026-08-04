@@ -8,10 +8,39 @@ needed. It has two jobs:
    high-impact USD/EUR event, with the forecast and previous values.
 2. **Manual reaction logging** — when the release actually drops, you check
    the actual number yourself (ForexFactory, Investing.com, your broker's
-   calendar, MT4/5 — whatever you'd normally glance at), then trigger the
-   workflow manually with that number. The agent then computes the surprise
-   vs forecast, waits 15 minutes, pulls the EUR/USD price reaction, and
-   sends you the full read on Telegram.
+   calendar, MT4/5 — whatever you'd normally glance at), then reply
+   **directly in Telegram** with `/log <event> | <actual>` (see below). No
+   need to open GitHub. The agent picks the command up on its next 5-minute
+   run, computes the surprise vs forecast, waits 15 minutes, pulls the
+   EUR/USD price reaction, and sends you the full read on Telegram.
+
+## Telegram commands
+
+Send these to your bot chat directly — no GitHub UI needed:
+
+```
+/log <event name> | <actual> | [forecast] | [previous] | [USD|EUR]
+```
+Only `<event name>` and `<actual>` are required. Examples:
+```
+/log NFP | 254K | 200K | 180K
+/log CPI m/m | 0.3%
+```
+
+```
+/status
+```
+Shows how many events are pending reaction analysis, currently pre-alerted
+(dedup window), and logged historically.
+
+```
+/help
+```
+Reprints this usage.
+
+Commands are picked up on the next scheduled run, so allow up to ~5 minutes
+for a reply. The old GitHub Actions `workflow_dispatch` manual trigger still
+works too, as a fallback if Telegram is ever down.
 
 ## Why it works this way
 
