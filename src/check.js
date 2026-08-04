@@ -3,12 +3,68 @@ import { getRecentCandles, snapshotAroundRelease } from './price.js';
 import { calculateSurprise } from './surprise.js';
 import { generateSummary } from './summarize.js';
 import { logEvent } from './logger.js';
-import { sendTelegramAlert } from './telegram.js';
-import { isAlerted, markAlerted, markPending, getPending, markProcessed } from './state.js';
+import { sendTelegramAlert, getTelegramUpdates } from './telegram.js';
+import {
+  isAlerted, markAlerted, markPending, getPending, markProcessed,
+  getTelegramOffset, setTelegramOffset, getStateSummary,
+} from './state.js';
+import { parseCommand } from './commands.js';
 
 const PREALERT_WINDOW_MS = 60 * 60 * 1000; // alert for events within the next 60 min
 const REACTION_WAIT_MS = 15 * 60 * 1000; // wait 15 min after logging before pulling price reaction
 const PENDING_TIMEOUT_MS = 2 * 60 * 60 * 1000; // give up on a pending event after 2 hours
+
+async function handleTelegramCommands() {
+  const offset = getTelegramOffset();
+  const updates = await getTelegramUpdates(offset);
+  if (updates.length === 0) return;
+
+  let maxUpdateId = offset - 1;
+
+  for (const update of updates) {
+    maxUpdateId = Math.max(maxUpdateId, update.update_id);
+
+    const text = update.message?.text;
+    if (!text) continue;
+
+    const command = parseCommand(text);
+    if (!command) continue;
+
+    if (command.type === 'help') {
+      await sendTelegramAlert(
+        '*Commands*\n' +
+        '`/log <event> | <actual> | [forecast] | [previous] | [USD|EUR]`\n' +
+        'e.g. `/log NFP | 254K | 200K`\n\n' +
+        '`/status` — pending / alerted / logged counts\n\n' +
+        '_Commands are picked up within ~5 min (next scheduled run)._'
+      );
+    } else if (command.type === 'log_error') {
+      await sendTelegramAlert(`⚠️ ${command.message}`);
+    } else if (command.type === 'log') {
+      const releasedEvent = {
+        event: command.event,
+        country: command.country,
+        time: new Date().toISOString(),
+        actual: command.actual,
+        forecast: command.forecast,
+        previous: command.previous,
+      };
+      console.log(`Telegram log received: ${releasedEvent.event} (${releasedEvent.country}) actual=${releasedEvent.actual}`);
+      markPending(releasedEvent);
+      await sendTelegramAlert(
+        `✅ Logged *${command.event}* (${command.country}) actual=${command.actual}.\nReaction analysis in ~15 min.`
+      );
+    } else if (command.type === 'status') {
+      const s = getStateSummary();
+      await sendTelegramAlert(
+        `*Status*\nAwaiting reaction analysis: ${s.pendingCount}\n` +
+        `Pre-alerted (dedup window): ${s.alertedCount}\nLogged historically: ${s.processedCount}`
+      );
+    }
+  }
+
+  setTelegramOffset(maxUpdateId + 1);
+}
 
 async function handleManualLog() {
   const eventName = process.env.MANUAL_EVENT;
@@ -54,7 +110,8 @@ async function handleUpcomingAlerts() {
       `*Upcoming: ${event.event}* (${event.country})\n` +
       `In ~${minutesAway} min\n` +
       `Forecast: ${event.forecast ?? 'n/a'} | Previous: ${event.previous ?? 'n/a'}\n\n` +
-      `When it drops, trigger the workflow manually with the actual value to get the reaction analysis.`;
+      `When it drops, reply here:\n` +
+      `/log ${event.event} | <actual value>`;
 
     console.log(`Pre-alerting: ${event.event} (${event.country}) in ${minutesAway} min`);
     await sendTelegramAlert(msg);
@@ -110,7 +167,8 @@ async function main() {
   console.log(`\n[${new Date().toISOString()}] Running check...`);
 
   try {
-    await handleManualLog();
+    await handleTelegramCommands();
+    await handleManualLog(); // kept as a GitHub Actions UI fallback if you ever prefer it
     await handleUpcomingAlerts();
     await handlePendingEvents();
   } catch (err) {

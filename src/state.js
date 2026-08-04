@@ -4,7 +4,7 @@ const STATE_PATH = new URL('../data/processed_state.json', import.meta.url);
 
 function loadState() {
   if (!existsSync(STATE_PATH)) {
-    return { alerted: [], pending: [], processed: [] };
+    return { alerted: [], pending: [], processed: [], telegramOffset: 0 };
   }
   try {
     const parsed = JSON.parse(readFileSync(STATE_PATH, 'utf-8'));
@@ -12,9 +12,10 @@ function loadState() {
       alerted: parsed.alerted || [],
       pending: parsed.pending || [],
       processed: parsed.processed || [],
+      telegramOffset: parsed.telegramOffset || 0,
     };
   } catch {
-    return { alerted: [], pending: [], processed: [] };
+    return { alerted: [], pending: [], processed: [], telegramOffset: 0 };
   }
 }
 
@@ -68,4 +69,27 @@ export function markProcessed(releasedEvent) {
   state.pending = state.pending.filter(p => p.key !== key);
   if (state.processed.length > 500) state.processed = state.processed.slice(-500);
   saveState(state);
+}
+
+// --- Telegram command polling offset (avoids reprocessing old messages) ---
+
+export function getTelegramOffset() {
+  return loadState().telegramOffset;
+}
+
+export function setTelegramOffset(offset) {
+  const state = loadState();
+  state.telegramOffset = offset;
+  saveState(state);
+}
+
+// --- Status summary for the /status command ---
+
+export function getStateSummary() {
+  const state = loadState();
+  return {
+    pendingCount: state.pending.length,
+    alertedCount: state.alerted.length,
+    processedCount: state.processed.length,
+  };
 }

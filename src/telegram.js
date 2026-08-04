@@ -33,3 +33,32 @@ export async function sendTelegramAlert(text) {
     console.error('Telegram send error:', err.message);
   }
 }
+
+/**
+ * Polls Telegram for new messages since `offset` (an update_id).
+ * Used to let you send /log and /status commands from Telegram itself,
+ * instead of needing the GitHub Actions UI.
+ * NOTE: getUpdates fails if a webhook is set on this bot - keep this bot webhook-free.
+ */
+export async function getTelegramUpdates(offset) {
+  if (!BOT_TOKEN) return [];
+
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${offset}&timeout=0`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.error(`Telegram getUpdates failed: ${res.status}`);
+      return [];
+    }
+    const data = await res.json();
+    if (!data.ok) {
+      console.error('Telegram getUpdates returned not-ok:', JSON.stringify(data));
+      return [];
+    }
+    return data.result || [];
+  } catch (err) {
+    console.error('Telegram getUpdates error:', err.message);
+    return [];
+  }
+}
