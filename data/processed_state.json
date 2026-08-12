@@ -7,7 +7,11 @@
     "FOMC Press Conference-2026-07-29T18:30:00.000Z",
     "Average Hourly Earnings m/m-2026-08-07T12:30:00.000Z",
     "Non-Farm Employment Change-2026-08-07T12:30:00.000Z",
-    "Unemployment Rate-2026-08-07T12:30:00.000Z"
+    "Unemployment Rate-2026-08-07T12:30:00.000Z",
+    "Core CPI m/m-2026-08-12T12:30:00.000Z",
+    "Core CPI y/y-2026-08-12T12:30:00.000Z",
+    "CPI m/m-2026-08-12T12:30:00.000Z",
+    "CPI y/y-2026-08-12T12:30:00.000Z"
   ],
   "pending": [],
   "processed": [
