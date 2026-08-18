@@ -15,7 +15,20 @@
     "Core PPI m/m-2026-08-13T12:30:00.000Z",
     "PPI m/m-2026-08-13T12:30:00.000Z"
   ],
-  "pending": [],
+  "pending": [
+    {
+      "key": "Unemployment Rate-2026-08-18T14:28:51.490Z",
+      "releasedEvent": {
+        "event": "Unemployment Rate",
+        "country": "USD",
+        "time": "2026-08-18T14:28:51.490Z",
+        "actual": "4.0%",
+        "forecast": "4.1%",
+        "previous": " 4.0%"
+      },
+      "loggedAt": "2026-08-18T14:28:51.491Z"
+    }
+  ],
   "processed": [
     "Test Event-2026-07-20T20:53:52.278Z",
     "CPI-2026-08-18T08:12:07.609Z",
