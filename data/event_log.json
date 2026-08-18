@@ -73,5 +73,30 @@
     },
     "summary": "Retail Sales m/m: actual 0.6% (large beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
     "loggedAt": "2026-08-18T14:21:32.572Z"
+  },
+  {
+    "event": {
+      "event": "Unemployment Rate",
+      "country": "USD",
+      "time": "2026-08-18T14:28:51.490Z",
+      "actual": "4.0%",
+      "forecast": "4.1%",
+      "previous": " 4.0%"
+    },
+    "surprise": {
+      "rawDiff": -0.1,
+      "directionalSurprise": 0.1,
+      "magnitude": "modest",
+      "currency": "USD",
+      "bullishFor": "USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.15848,
+      "after1m": 1.15848,
+      "after5m": 1.15848,
+      "after15m": 1.15848
+    },
+    "summary": "Unemployment Rate: actual 4.0% (modest beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
+    "loggedAt": "2026-08-18T14:59:34.010Z"
   }
 ]
