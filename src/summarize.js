@@ -53,7 +53,11 @@ async function tryOpenRouter(prompt) {
       }),
     });
 
-    if (!res.ok) throw new Error(`OpenRouter error: ${res.status}`);
+    if (!res.ok) {
+      const errBody = await res.text().catch(() => '<unreadable body>');
+      console.error('OPENROUTER_DEBUG status:', res.status, 'body:', errBody);
+      throw new Error(`OpenRouter error: ${res.status} - ${errBody}`);
+    }
 
     const data = await res.json();
     const text = data.choices?.[0]?.message?.content;
@@ -61,6 +65,12 @@ async function tryOpenRouter(prompt) {
     return text.trim();
   } catch (err) {
     console.error('OpenRouter summary generation failed, falling back:', err.message);
+    try {
+      const fs = await import('fs');
+      fs.writeFileSync('data/debug_openrouter.log', `${new Date().toISOString()} - ${err.message}\n`, { flag: 'a' });
+    } catch (writeErr) {
+      // ignore debug write failures
+    }
     return null;
   }
 }
