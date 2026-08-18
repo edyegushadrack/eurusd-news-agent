@@ -15,22 +15,10 @@
     "Core PPI m/m-2026-08-13T12:30:00.000Z",
     "PPI m/m-2026-08-13T12:30:00.000Z"
   ],
-  "pending": [
-    {
-      "key": "CPI-2026-08-18T08:12:07.609Z",
-      "releasedEvent": {
-        "event": "CPI",
-        "country": "USD",
-        "time": "2026-08-18T08:12:07.609Z",
-        "actual": "3%",
-        "forecast": "3.2%",
-        "previous": "5%"
-      },
-      "loggedAt": "2026-08-18T08:12:07.610Z"
-    }
-  ],
+  "pending": [],
   "processed": [
-    "Test Event-2026-07-20T20:53:52.278Z"
+    "Test Event-2026-07-20T20:53:52.278Z",
+    "CPI-2026-08-18T08:12:07.609Z"
   ],
   "telegramOffset": 945466430
 }

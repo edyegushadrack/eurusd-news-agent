@@ -23,5 +23,30 @@
     },
     "summary": "Test Event: actual 3.5% (modest beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
     "loggedAt": "2026-07-20T21:35:34.278Z"
+  },
+  {
+    "event": {
+      "event": "CPI",
+      "country": "USD",
+      "time": "2026-08-18T08:12:07.609Z",
+      "actual": "3%",
+      "forecast": "3.2%",
+      "previous": "5%"
+    },
+    "surprise": {
+      "rawDiff": -0.2,
+      "directionalSurprise": -0.2,
+      "magnitude": "modest",
+      "currency": "USD",
+      "bullishFor": "not-USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.15713,
+      "after1m": 1.15713,
+      "after5m": 1.15713,
+      "after15m": 1.15713
+    },
+    "summary": "CPI: actual 3% (modest miss vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
+    "loggedAt": "2026-08-18T08:58:23.430Z"
   }
 ]
