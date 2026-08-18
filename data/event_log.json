@@ -48,5 +48,30 @@
     },
     "summary": "CPI: actual 3% (modest miss vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
     "loggedAt": "2026-08-18T08:58:23.430Z"
+  },
+  {
+    "event": {
+      "event": "Retail Sales m/m",
+      "country": "USD",
+      "time": "2026-08-18T13:46:20.505Z",
+      "actual": "0.6%",
+      "forecast": "0.4%",
+      "previous": "0.2%"
+    },
+    "surprise": {
+      "rawDiff": 0.2,
+      "directionalSurprise": 0.2,
+      "magnitude": "large",
+      "currency": "USD",
+      "bullishFor": "USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.15825,
+      "after1m": 1.15825,
+      "after5m": 1.15825,
+      "after15m": 1.15825
+    },
+    "summary": "Retail Sales m/m: actual 0.6% (large beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
+    "loggedAt": "2026-08-18T14:21:32.572Z"
   }
 ]
