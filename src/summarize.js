@@ -1,15 +1,29 @@
+const OPENROUTER_KEY = process.env.OPENROUTER_API_KEY;
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 
 /**
  * Generate a short plain-English trading read from the event + surprise + price reaction.
- * Falls back to a template-based summary if no Anthropic key is set.
+ * Tries OpenRouter (free Llama 3.3-70B) first, falls back to Anthropic if configured,
+ * falls back to a template-based summary if both are unavailable or fail.
  */
 export async function generateSummary({ event, surprise, priceSnapshot }) {
-  if (!ANTHROPIC_KEY) {
-    return templateSummary({ event, surprise, priceSnapshot });
+  const prompt = buildPrompt({ event, surprise, priceSnapshot });
+
+  if (OPENROUTER_KEY) {
+    const result = await tryOpenRouter(prompt);
+    if (result) return result;
   }
 
-  const prompt = `You are a terse forex trading assistant. Given this economic release and EUR/USD price reaction, write a 2-3 sentence trading-relevant read. Be direct, no fluff, no disclaimers.
+  if (ANTHROPIC_KEY) {
+    const result = await tryAnthropic(prompt);
+    if (result) return result;
+  }
+
+  return templateSummary({ event, surprise, priceSnapshot });
+}
+
+function buildPrompt({ event, surprise, priceSnapshot }) {
+  return `You are a terse forex trading assistant. Given this economic release and EUR/USD price reaction, write a 2-3 sentence trading-relevant read. Be direct, no fluff, no disclaimers.
 
 Event: ${event.event} (${event.country})
 Actual: ${event.actual}
@@ -22,7 +36,36 @@ EUR/USD price reaction:
 1 min after: ${priceSnapshot.after1m}
 5 min after: ${priceSnapshot.after5m}
 15 min after: ${priceSnapshot.after15m}`;
+}
 
+async function tryOpenRouter(prompt) {
+  try {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENROUTER_KEY}`,
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-3.3-70b-instruct:free',
+        max_tokens: 200,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+
+    if (!res.ok) throw new Error(`OpenRouter error: ${res.status}`);
+
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content;
+    if (!text) throw new Error('OpenRouter returned no content');
+    return text.trim();
+  } catch (err) {
+    console.error('OpenRouter summary generation failed, falling back:', err.message);
+    return null;
+  }
+}
+
+async function tryAnthropic(prompt) {
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -42,10 +85,11 @@ EUR/USD price reaction:
 
     const data = await res.json();
     const text = data.content?.find(b => b.type === 'text')?.text;
-    return text || templateSummary({ event, surprise, priceSnapshot });
+    if (!text) throw new Error('Anthropic returned no content');
+    return text;
   } catch (err) {
-    console.error('Summary generation failed, falling back to template:', err.message);
-    return templateSummary({ event, surprise, priceSnapshot });
+    console.error('Anthropic summary generation failed, falling back to template:', err.message);
+    return null;
   }
 }
 
