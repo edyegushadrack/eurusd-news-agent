@@ -15,7 +15,20 @@
     "Core PPI m/m-2026-08-13T12:30:00.000Z",
     "PPI m/m-2026-08-13T12:30:00.000Z"
   ],
-  "pending": [],
+  "pending": [
+    {
+      "key": "Retail Sales m/m-2026-08-18T13:46:20.505Z",
+      "releasedEvent": {
+        "event": "Retail Sales m/m",
+        "country": "USD",
+        "time": "2026-08-18T13:46:20.505Z",
+        "actual": "0.6%",
+        "forecast": "0.4%",
+        "previous": "0.2%"
+      },
+      "loggedAt": "2026-08-18T13:46:20.505Z"
+    }
+  ],
   "processed": [
     "Test Event-2026-07-20T20:53:52.278Z",
     "CPI-2026-08-18T08:12:07.609Z"
