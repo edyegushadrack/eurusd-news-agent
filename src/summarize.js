@@ -47,7 +47,10 @@ async function tryOpenRouter(prompt) {
         Authorization: `Bearer ${OPENROUTER_KEY}`,
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-70b-instruct:free',
+        // 'openrouter/free' auto-selects a live free model instead of pinning
+        // one slug (e.g. meta-llama/llama-3.3-70b-instruct:free) that OpenRouter
+        // can delist without notice -- which is what broke this on 2026-08-18.
+        model: 'openrouter/free',
         max_tokens: 200,
         messages: [{ role: 'user', content: prompt }],
       }),
