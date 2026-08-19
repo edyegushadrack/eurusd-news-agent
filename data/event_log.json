@@ -123,5 +123,30 @@
     },
     "summary": "event: GDP q/q: actual 0.7% (large beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
     "loggedAt": "2026-08-19T06:35:12.040Z"
+  },
+  {
+    "event": {
+      "event": "NFP",
+      "country": "USD",
+      "time": "2026-08-19T11:21:02.400Z",
+      "actual": "210K",
+      "forecast": "180K",
+      "previous": " 195K"
+    },
+    "surprise": {
+      "rawDiff": 30000,
+      "directionalSurprise": 30000,
+      "magnitude": "large",
+      "currency": "USD",
+      "bullishFor": "USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.16062,
+      "after1m": 1.16062,
+      "after5m": 1.16062,
+      "after15m": 1.16062
+    },
+    "summary": "NFP printed a solid 30K beat (210K vs 180K), yet EUR/USD remained completely frozen at 1.16062 for 15 minutes post-release. The market has fully discounted the headline or is priorit",
+    "loggedAt": "2026-08-19T11:55:46.841Z"
   }
 ]
