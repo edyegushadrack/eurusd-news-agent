@@ -67,7 +67,7 @@ async function tryOpenRouter(prompt) {
     console.error('OpenRouter summary generation failed, falling back:', err.message);
     try {
       const fs = await import('fs');
-      fs.writeFileSync('data/debug_openrouter.log', `${new Date().toISOString()} - ${err.message}\n`, { flag: 'a' });
+      fs.writeFileSync('data/debug_openrouter.json', `${new Date().toISOString()} - ${err.message}\n`, { flag: 'a' });
     } catch (writeErr) {
       // ignore debug write failures
     }
