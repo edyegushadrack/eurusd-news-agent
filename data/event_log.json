@@ -98,5 +98,30 @@
     },
     "summary": "Unemployment Rate: actual 4.0% (modest beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
     "loggedAt": "2026-08-18T14:59:34.010Z"
+  },
+  {
+    "event": {
+      "event": "event: GDP q/q",
+      "country": "USD",
+      "time": "2026-08-19T05:39:34.932Z",
+      "actual": "0.7%",
+      "forecast": "0.5%",
+      "previous": "0.6%"
+    },
+    "surprise": {
+      "rawDiff": 0.2,
+      "directionalSurprise": 0.2,
+      "magnitude": "large",
+      "currency": "USD",
+      "bullishFor": "USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.15897,
+      "after1m": 1.15897,
+      "after5m": 1.15897,
+      "after15m": 1.15897
+    },
+    "summary": "event: GDP q/q: actual 0.7% (large beat vs forecast). EUR/USD moved 0.0 pips in first minute, 0.0 pips over 15 min.",
+    "loggedAt": "2026-08-19T06:35:12.040Z"
   }
 ]
