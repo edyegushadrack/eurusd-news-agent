@@ -15,7 +15,20 @@
     "Core PPI m/m-2026-08-13T12:30:00.000Z",
     "PPI m/m-2026-08-13T12:30:00.000Z"
   ],
-  "pending": [],
+  "pending": [
+    {
+      "key": "NFP-2026-08-19T11:21:02.400Z",
+      "releasedEvent": {
+        "event": "NFP",
+        "country": "USD",
+        "time": "2026-08-19T11:21:02.400Z",
+        "actual": "210K",
+        "forecast": "180K",
+        "previous": " 195K"
+      },
+      "loggedAt": "2026-08-19T11:21:02.400Z"
+    }
+  ],
   "processed": [
     "Test Event-2026-07-20T20:53:52.278Z",
     "CPI-2026-08-18T08:12:07.609Z",
