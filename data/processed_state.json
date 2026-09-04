@@ -18,7 +18,20 @@
     "Core PCE Price Index m/m-2026-08-26T12:30:00.000Z",
     "Prelim GDP q/q-2026-08-26T12:30:00.000Z"
   ],
-  "pending": [],
+  "pending": [
+    {
+      "key": "NFP-2026-09-04T07:28:15.874Z",
+      "releasedEvent": {
+        "event": "NFP",
+        "country": "USD",
+        "time": "2026-09-04T07:28:15.874Z",
+        "actual": "-23K\t",
+        "forecast": "85K",
+        "previous": "20K"
+      },
+      "loggedAt": "2026-09-04T07:28:15.874Z"
+    }
+  ],
   "processed": [
     "Test Event-2026-07-20T20:53:52.278Z",
     "CPI-2026-08-18T08:12:07.609Z",
