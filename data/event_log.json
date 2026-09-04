@@ -148,5 +148,30 @@
     },
     "summary": "NFP printed a solid 30K beat (210K vs 180K), yet EUR/USD remained completely frozen at 1.16062 for 15 minutes post-release. The market has fully discounted the headline or is priorit",
     "loggedAt": "2026-08-19T11:55:46.841Z"
+  },
+  {
+    "event": {
+      "event": "NFP",
+      "country": "USD",
+      "time": "2026-09-04T07:28:15.874Z",
+      "actual": "-23K\t",
+      "forecast": "85K",
+      "previous": "20K"
+    },
+    "surprise": {
+      "rawDiff": -108000,
+      "directionalSurprise": -108000,
+      "magnitude": "large",
+      "currency": "USD",
+      "bullishFor": "not-USD"
+    },
+    "priceSnapshot": {
+      "before1m": 1.16233,
+      "after1m": 1.16233,
+      "after5m": 1.16233,
+      "after15m": 1.16233
+    },
+    "summary": "The -23K NFP miss was far below expectations, yet EUR/USD held steady at 1.16233. The lack of reaction indicates the market had already priced the weak jobs data, so short‑term traders should remain neutral until a new catalyst emerges.",
+    "loggedAt": "2026-09-04T09:04:33.741Z"
   }
 ]

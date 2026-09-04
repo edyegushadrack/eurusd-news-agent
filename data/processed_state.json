@@ -18,27 +18,15 @@
     "Core PCE Price Index m/m-2026-08-26T12:30:00.000Z",
     "Prelim GDP q/q-2026-08-26T12:30:00.000Z"
   ],
-  "pending": [
-    {
-      "key": "NFP-2026-09-04T07:28:15.874Z",
-      "releasedEvent": {
-        "event": "NFP",
-        "country": "USD",
-        "time": "2026-09-04T07:28:15.874Z",
-        "actual": "-23K\t",
-        "forecast": "85K",
-        "previous": "20K"
-      },
-      "loggedAt": "2026-09-04T07:28:15.874Z"
-    }
-  ],
+  "pending": [],
   "processed": [
     "Test Event-2026-07-20T20:53:52.278Z",
     "CPI-2026-08-18T08:12:07.609Z",
     "Retail Sales m/m-2026-08-18T13:46:20.505Z",
     "Unemployment Rate-2026-08-18T14:28:51.490Z",
     "event: GDP q/q-2026-08-19T05:39:34.932Z",
-    "NFP-2026-08-19T11:21:02.400Z"
+    "NFP-2026-08-19T11:21:02.400Z",
+    "NFP-2026-09-04T07:28:15.874Z"
   ],
   "telegramOffset": 945466432
 }
