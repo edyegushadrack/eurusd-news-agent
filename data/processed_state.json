@@ -17,7 +17,11 @@
     "FOMC Meeting Minutes-2026-08-19T18:00:00.000Z",
     "Core PCE Price Index m/m-2026-08-26T12:30:00.000Z",
     "Prelim GDP q/q-2026-08-26T12:30:00.000Z",
-    "FOMC Press Conference-2026-09-16T18:30:00.000Z"
+    "FOMC Press Conference-2026-09-16T18:30:00.000Z",
+    "Core CPI m/m-2026-10-14T12:30:00.000Z",
+    "Core CPI y/y-2026-10-14T12:30:00.000Z",
+    "CPI m/m-2026-10-14T12:30:00.000Z",
+    "CPI y/y-2026-10-14T12:30:00.000Z"
   ],
   "pending": [],
   "processed": [
